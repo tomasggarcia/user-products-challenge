@@ -3,27 +3,26 @@ import db from "../../models"
 
 
 export async function create(req: Request, res: Response) {
-    const { firstName, lastName, email } = req.body;
-    
-    if(email){
-        try{
-            const user = await db.User.findOrCreate({
-                where: { email: email },
+    const { id, name, price, stock, image } = req.body;
+
+        try {
+            const product = await db.Product.findOrCreate({
+                where: { productId: id },
                 defaults: {
-                    email: email,
-                    firstName: firstName,
-                    lastName: lastName
+                    name: name,
+                    price: price,
+                    stock: stock,
+                    image: image
                 }
             });
-            if (user[1] === true) {
-                res.send('user created')
+            if (product[1] === true) {
+                res.send('product created')
             } else
-            if (user[1] === false) {
-                res.send('email already exists')
-            } else
-            res.status(500).send('Something broke!');
-        }catch (error) {
+                if (product[1] === false) {
+                    res.send('product already exists')
+                } else
+                    res.status(500).send('Something broke!');
+        } catch (error) {
             res.send(error)
         }
-    } else res.send('invalid email')
 }

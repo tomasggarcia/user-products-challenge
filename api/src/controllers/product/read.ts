@@ -3,19 +3,18 @@ import db from "../../models"
 
 
 export async function read(req: Request, res: Response) {
-    const { firstName, lastName, email } = req.body;
+    const { id, name, price, stock, image } = req.body;
 
-    console.log('aca', firstName, lastName, email)
-    let user = ''
-    if(email){
+
+    if(id){
         try {
-            user = await db.User.findOne({
-                where: { email: email }});
-            if(user!=null){
-                res.send(user)
-            } else res.send('email does not exist')
+            const product = await db.Product.findOne({
+                where: { productId: id }});
+            if(product!=null){
+                res.send(product)
+            } else res.send('product does not exist')
         } catch(error) {
             res.send(error)
         }
-    } else res.send('email missing')
+    } else res.send('productId missing')
 }

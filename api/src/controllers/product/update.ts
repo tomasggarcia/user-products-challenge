@@ -3,24 +3,21 @@ import db from "../../models"
 
 
 export async function update(req: Request, res: Response) {
-    const { firstName, lastName, email } = req.body;
+    const { id, name, price, stock, image } = req.body;
 
-    var user = []
-    console.log(email)
-    if (email) {
+    if (id) {
         try {
-            user = await db.User.update({firstName:firstName,lastName:lastName},{
-                where: { email: email }
+            const product = await db.Product.update({name:name,price:price,stock:stock,image:image},{
+                where: { productId: id }
             });
-            if(user[0]===0){
-                res.send('email does not exist')
+            console.log(product)
+            if(product[0]===0){
+                res.send('product does not exist')
             } else {
-                res.send('user updated')
+                res.send('product updated')
             }
         } catch (error) {
             res.send(error)
         }
-    } else res.send('email missing')
-
-    res.status(500).send('Something broke!');
+    } else res.send('productId missing')
 }

@@ -22,14 +22,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
         static associate(models: any) {
             //associations
-            Product.belongsTo(models.User, { foreignKey: "userId" });
-            Product.hasMany(models.Image, { foreignKey: "productId" });
-            Product.hasMany(models.Review, { foreignKey: "productId" });
-            Product.belongsTo(models.Category, { foreignKey: "categoryId" });
-            Product.hasMany(models.CartItem, { foreignKey: "productId" });
-            Product.hasMany(models.Order, { foreignKey: "productId" });
-            Product.hasMany(models.Wishlist, { foreignKey: "productId" });
-            Product.hasMany(models.Question, { foreignKey: "productId" });
+
         }
     }
     Product.init(
