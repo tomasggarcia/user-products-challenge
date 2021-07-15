@@ -8,7 +8,7 @@ import product from './product'
 const router = Router();
 
 //routes
-// router.use("/", home);
+router.use("/", home);
 router.use("/user", user)
 router.use("/product", product)
 

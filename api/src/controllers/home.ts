@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 function home(req: Request, res: Response){
-    res.send('hello world')
+    res.send('home')
 }
 
 
