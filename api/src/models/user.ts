@@ -9,6 +9,7 @@ interface UserAttributes {
     email: string;
     firstName: string;
     lastName: string;
+    password: string
 
 }
 
@@ -23,6 +24,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         email!: string;
         firstName!: string;
         lastName!: string;
+        password!: string
 
         static associate(models: any) {
 
@@ -49,6 +51,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            }
         },
         {
             sequelize,

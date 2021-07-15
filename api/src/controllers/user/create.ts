@@ -3,7 +3,7 @@ import db from "../../models"
 
 
 export async function create(req: Request, res: Response) {
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     
     if(email){
         try{
@@ -12,7 +12,8 @@ export async function create(req: Request, res: Response) {
                 defaults: {
                     email: email,
                     firstName: firstName,
-                    lastName: lastName
+                    lastName: lastName,
+                    password: password
                 }
             });
             if (user[1] === true) {
