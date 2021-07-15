@@ -1,0 +1,67 @@
+"use strict";
+
+import { Model, Sequelize, UUIDV4 } from "sequelize";
+
+interface ProductAttributes {
+    productId: string;
+    name: string;
+    price: number;
+    stock: number;
+    image: string;
+}
+
+module.exports = (sequelize: any, DataTypes: any) => {
+    class Product
+        extends Model<ProductAttributes>
+        implements ProductAttributes {
+        productId!: string;
+        name!: string;
+        price!: number;
+        stock!: number;
+        image!: string;
+
+        static associate(models: any) {
+            //associations
+            Product.belongsTo(models.User, { foreignKey: "userId" });
+            Product.hasMany(models.Image, { foreignKey: "productId" });
+            Product.hasMany(models.Review, { foreignKey: "productId" });
+            Product.belongsTo(models.Category, { foreignKey: "categoryId" });
+            Product.hasMany(models.CartItem, { foreignKey: "productId" });
+            Product.hasMany(models.Order, { foreignKey: "productId" });
+            Product.hasMany(models.Wishlist, { foreignKey: "productId" });
+            Product.hasMany(models.Question, { foreignKey: "productId" });
+        }
+    }
+    Product.init(
+        {
+            productId: {
+                type: DataTypes.UUID,
+                defaultValue: UUIDV4,
+                allowNull: false,
+                primaryKey: true,
+                unique: true,
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            price: {
+                type: DataTypes.FLOAT,
+                allowNull: false,
+            },
+            stock: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            image: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+            },
+        },
+        {
+            sequelize,
+            modelName: "Product",
+        }
+    );
+    return Product;
+};
