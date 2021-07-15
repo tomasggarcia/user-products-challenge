@@ -17,9 +17,9 @@ export async function create(req: Request, res: Response) {
 
     if (user[1] === true) {
         res.send('email created')
-    }
+    } else
     if (user[1] === false) {
         res.send('email already exists')
-    }
+    } else
     res.status(500).send('Something broke!');
 }
