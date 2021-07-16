@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { IColors, IErrorUser } from "../Interfaces/user";
-
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import isStrongPassword from "validator/lib/isStrongPassword";
 import isEmail from "validator/lib/isEmail";
 import axios from "axios";
 
 
 export default function Login() {
-
+    const queryClient = new QueryClient()
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
     const [invalid, setInvalid] = useState<boolean>();
@@ -119,7 +119,7 @@ export default function Login() {
             <input name="pass" onChange={handleChange} type="password"
                 placeholder="Enter Password"></input><br />
             {errors?.pass ? (
-                <label className="mt-1 d-flex justify-content-center">Password is too short (Make sure its at least 8 characters)</label>
+                <label >Password is too short (Make sure its at least 8 characters)</label>
             ) : null}
             {errors?.email === true || errors?.pass === true || invalid === true || emailInitialState === true || passInitialState === true ? (
                 <button className="mt-3" disabled>
