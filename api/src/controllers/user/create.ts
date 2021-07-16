@@ -4,7 +4,8 @@ import db from "../../models"
 
 export async function create(req: Request, res: Response) {
     const { firstName, lastName, email, password } = req.body;
-    
+    console.log(firstName, lastName, email, password)
+    console.log(req.body)
     if(email){
         try{
             const user = await db.User.findOrCreate({

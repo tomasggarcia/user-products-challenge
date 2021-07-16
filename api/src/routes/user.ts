@@ -10,6 +10,6 @@ const user = Router();
 user.post("/", create);
 user.get("/", read);
 user.put("/", update);
-user.get("/login", login);
+user.post("/login", login);
 
 export default user;

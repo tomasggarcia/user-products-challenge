@@ -17,3 +17,11 @@ export interface IColors {
     repeatPass?: string;
     username?: string | undefined;
 }
+
+
+export interface IUser {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    password?: string;
+}

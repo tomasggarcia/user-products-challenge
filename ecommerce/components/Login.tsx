@@ -3,6 +3,7 @@ import { IColors, IErrorUser } from "../Interfaces/user";
 
 import isStrongPassword from "validator/lib/isStrongPassword";
 import isEmail from "validator/lib/isEmail";
+import axios from "axios";
 
 
 export default function Login() {
@@ -63,8 +64,14 @@ export default function Login() {
 
 
     const handleSubmit = async () => {
-        
-
+        console.log(email, password)
+        const resp:any = await axios
+            .post(`http://localhost:3001/user/login`, {
+                email: email,
+                pass: password,
+            })
+            .catch(err => console.log(err));
+        alert(resp.data)
     };
 
 
